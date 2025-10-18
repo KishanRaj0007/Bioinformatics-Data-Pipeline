@@ -47,64 +47,7 @@ This allows individual components (e.g., sequence aligner, variant caller) to be
 
 The system is composed of several independent microservices that communicate asynchronously through an Apache Kafka event bus. This decoupled approach ensures resilience and scalability.
 
-```mermaid
-graph TD
-    %% Title
-    A[Scientist] -->|1. HTTP (localhost:3000)| B[dashboard-ui (React)]
-
-    %% Frontend
-    subgraph Docker_Compose
-        subgraph Frontend
-            B -->|"2. HTTP POST /api/ingest"| C[ingestion-service (Spring Boot)]
-        end
-
-        %% Backend Processing Services
-        subgraph Backend_Services[Backend Services]
-            C -->|"3. raw-file-registered"| D[(Kafka Cluster)]
-            D -->|"4. raw-file-registered"| E[alignment-service (Spring Boot)]
-            E -->|"5. alignment-complete"| D
-            D -->|"6. alignment-complete"| F[variant-calling-service (Spring Boot)]
-            F -->|"7. variants-called"| D
-            D -->|"8. variants-called"| G[persistence-service (Spring Boot)]
-            G -->|"9. write samples, variants"| H[(MongoDB)]
-            E -->|"read fileUri"| I[(Shared File System)]
-        end
-
-        %% Backend AI Service
-        subgraph ML_Service[ml-service (FastAPI)]
-            J[model.joblib (XGBoost)]
-            ML[ml-service Container :8001->8001]
-            ML --> J
-        end
-
-        %% Infrastructure
-        subgraph Infrastructure[Infrastructure]
-            subgraph Kafka[Apache Kafka]
-                D --> Z[Zookeeper]
-            end
-            subgraph DB[MongoDB]
-                H --> H1[(samples collection)]
-                H --> H2[(variants collection)]
-            end
-            I[/data (Docker Volume)/]
-        end
-    end
-
-    %% ML Data Flow
-    A -->|"HTTP POST /train"| ML
-    ML -->|"query variants"| H
-    B -->|"10. HTTP POST /predict"| ML
-    ML -->|"11. prediction result"| B
-
-    %% Dependencies
-    C -.->|"depends_on"| D
-    E -.->|"depends_on"| D
-    F -.->|"depends_on"| D
-    G -.->|"depends_on"| D
-    G -.->|"depends_on"| H
-    ML -.->|"depends_on"| H
-
-```
+![LLD](LLD.png)
 
 ### docker-commpose.yml
 This single file will serve as the reproducible, version-controlled definition of our entire system.This file defines three services running inside isolated docker containers:-
