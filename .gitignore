@@ -1,0 +1,30 @@
+# Ignore large data files
+# This is the most important rule.
+/ai-bio-platform/data/
+
+# Ignore IDE and OS-specific files
+.idea/
+.vscode/
+*.iml
+**/.DS_Store
+
+# Ignore Java build artifacts
+**/target/
+**/.mvn/
+**/*.log
+**/*.jar
+
+# Ignore Python artifacts
+**/__pycache__/
+**/*.pyc
+/ml-service/model.joblib
+
+# Ignore Node.js artifacts
+/dashboard-ui/node_modules/
+/dashboard-ui/build/
+
+# Ignore environment files
+**/.env
+
+# Ignore other miscellaneous files
+/reproducible_pipelines_1.pdf

@@ -1,0 +1,72 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.card {
+  background-color: #3a3f4a;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  margin-left: 10px;
+  font-size: 0.8em;
+}
+
+.button-group button {
+  background-color: #61dafb;
+  border: none;
+  color: #282c34;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.button-group button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.results-display {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.results-display.healthy {
+  color: #7CFC00;
+  font-weight: bold;
+}
+
+.results-display.diseased {
+  color: #FF4500;
+  font-weight: bold;
+}
+
+.error {
+  color: #FF6347;
+}
