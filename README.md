@@ -48,19 +48,18 @@ This allows individual components (e.g., sequence aligner, variant caller) to be
 The system is composed of several independent microservices that communicate asynchronously through an Apache Kafka event bus. This decoupled approach ensures resilience and scalability.
 
 ```mermaid
-%%{init: {"theme": "dark"}}%%
 graph TD
     %% Title
-    A[Scientist 👩‍🔬] -->|1. HTTP (localhost:3000)| B[dashboard-ui (React) 🌐]
+    A[Scientist] -->|1. HTTP (localhost:3000)| B[dashboard-ui (React)]
 
     %% Frontend
-    subgraph Docker Compose 🐳
+    subgraph Docker_Compose
         subgraph Frontend
             B -->|"2. HTTP POST /api/ingest"| C[ingestion-service (Spring Boot)]
         end
 
         %% Backend Processing Services
-        subgraph Backend_Services[Backend Services ☕]
+        subgraph Backend_Services[Backend Services]
             C -->|"3. raw-file-registered"| D[(Kafka Cluster)]
             D -->|"4. raw-file-registered"| E[alignment-service (Spring Boot)]
             E -->|"5. alignment-complete"| D
@@ -72,16 +71,16 @@ graph TD
         end
 
         %% Backend AI Service
-        subgraph ML_Service[ml-service (FastAPI) 🧠]
+        subgraph ML_Service[ml-service (FastAPI)]
             J[model.joblib (XGBoost)]
             ML[ml-service Container :8001->8001]
             ML --> J
         end
 
         %% Infrastructure
-        subgraph Infrastructure[Infrastructure ⚙️]
+        subgraph Infrastructure[Infrastructure]
             subgraph Kafka[Apache Kafka]
-                D --> Z[Zookeeper 🦓]
+                D --> Z[Zookeeper]
             end
             subgraph DB[MongoDB]
                 H --> H1[(samples collection)]
