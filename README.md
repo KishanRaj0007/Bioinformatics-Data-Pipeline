@@ -75,9 +75,9 @@ A consumer of alignment-complete events. It simulates the process of identifying
 ### persistence-service Microservice (Java/Spring Boot)
 A consumer of variants-called events. Its sole responsibility is to connect to the MongoDB database and save the sample metadata and variant information  in a structured, permanent format. This is the step that transforms our fleeting events into a queryable, long-term dataset—the foundation for all the analysis and machine learning.
 
-![persistence-service1](assets/persistence-service1.png)
-![persistence-service2](assets/persistence-service2.png)
-![persistence-service3](assets/persistence-service3.png)
+![persistence-service1](assets/persistence1.png)   
+![persistence-service2](assets/persistence2.png)    
+![persistence-service3](assets/persistence3.png)     
 
 ### ml-service Microservice (Python/FastAPI/XGBoost)
 The intelligence layer. It provides API endpoints to train an XGBoost model on the data stored in MongoDB and to serve real-time predictions for a given sample.
