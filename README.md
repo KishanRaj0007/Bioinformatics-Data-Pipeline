@@ -47,7 +47,7 @@ This allows individual components (e.g., sequence aligner, variant caller) to be
 
 The system is composed of several independent microservices that communicate asynchronously through an Apache Kafka event bus. This decoupled approach ensures resilience and scalability.
 
-![LLD](LLD.png)
+![LLD](assets/LLD.png)
 
 ### docker-commpose.yml
 This single file will serve as the reproducible, version-controlled definition of our entire system.This file defines three services running inside isolated docker containers:-
